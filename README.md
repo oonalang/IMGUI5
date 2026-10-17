@@ -12,10 +12,11 @@ app/src/main/
   assets/                                     fonts + avatar.rgba + logo.rgba
   jni/
     Android.mk, Application.mk
-    main.cpp            EGL setup, fonts, textures, touch input, frame loop
+    main.cpp            standalone NativeActivity host (EGL + frame loop), thin
     nl_layout.hpp       fits the 750x756 canvas to the screen, scales draw data and touch
     imgui/              your modified ImGui 1.89.7 core + android/opengl3 backends
-    menu/               neverlose_menu, hexsync_intro, gui, blur stub, hashes
+    menu/               neverlose_menu, hexsync_intro, gui, blur stub, hashes,
+                        nl_ui (host independent API), nl_embedded_assets
 ```
 
 ## Build in AIDE Pro
@@ -70,3 +71,5 @@ nl::TransformDrawData(ImGui::GetDrawData(), layout);    // then your normal Rend
 - Not tested on a device. What was checked: the menu, intro and ImGui core compile and
   run headless on desktop (all pages render), and `main.cpp` passes a syntax check
   against stub NDK headers. First real build may need small fixes for your NDK version.
+
+See `REPLACE_EVERYTHING.md` to swap this menu into an existing project.

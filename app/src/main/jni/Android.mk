@@ -23,10 +23,18 @@ LOCAL_SRC_FILES := \
     menu/hexsync_glow.cpp \
     menu/blur.cpp \
     menu/gui.cpp \
+    menu/nl_ui.cpp \
     main.cpp
 
 LOCAL_CFLAGS += -DIMGUI_IMPL_OPENGL_ES3 -DIMGUI_DISABLE_DEMO_WINDOWS -O2
 LOCAL_CPPFLAGS += -std=c++17
+
+# Set NL_EMBED := 1 to compile fonts/textures into the library instead of reading APK assets
+NL_EMBED ?= 0
+ifeq ($(NL_EMBED),1)
+LOCAL_SRC_FILES += menu/nl_embedded_assets.cpp
+LOCAL_CFLAGS += -DNL_EMBED_ASSETS
+endif
 
 LOCAL_LDLIBS := -llog -landroid -lEGL -lGLESv3
 LOCAL_STATIC_LIBRARIES := android_native_app_glue
