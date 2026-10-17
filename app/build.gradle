@@ -1,0 +1,25 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        applicationId "com.neverlose.menu"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        ndk { abiFilters 'arm64-v8a', 'armeabi-v7a' }
+    }
+
+    // Native code is built by ndk-build from jni/Android.mk
+    externalNativeBuild {
+        ndkBuild {
+            path 'src/main/jni/Android.mk'
+        }
+    }
+
+    buildTypes {
+        release { minifyEnabled false }
+    }
+}
